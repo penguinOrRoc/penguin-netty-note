@@ -15,7 +15,9 @@ public class HttpServer {
     public void start() throws Exception {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(bossGroup, workGroup).channel(NioServerSocketChannel.class).childHandler(new HttpChannelInitializer());
+            serverBootstrap.group(bossGroup, workGroup) //
+                    .channel(NioServerSocketChannel.class) //
+                    .childHandler(new HttpChannelInitializer()); //
             ChannelFuture channelFuture = serverBootstrap.bind(8000).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {
